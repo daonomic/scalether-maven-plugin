@@ -6,6 +6,16 @@
     <version>0.1.0-SNAPSHOT</version>
     <packaging>maven-plugin</packaging>
     <description>maven plugin to generate smart contract wrappers</description>
+    <distributionManagement>
+        <repository>
+            <id>nexus-releases</id>
+            <url>${nexus.url}/content/repositories/releases/</url>
+        </repository>
+        <snapshotRepository>
+            <id>nexus-snapshots</id>
+            <url>${nexus.url}/content/repositories/snapshots</url>
+        </snapshotRepository>
+    </distributionManagement>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.version>3.2.3</maven.version>
