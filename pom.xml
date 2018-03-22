@@ -1,26 +1,33 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
-    <groupId>org.scalether</groupId>
+    <groupId>io.daonomic.scalether</groupId>
     <artifactId>scalether-maven-plugin</artifactId>
-    <version>0.1.0-SNAPSHOT</version>
+    <version>0.1.0</version>
     <packaging>maven-plugin</packaging>
     <description>maven plugin to generate smart contract wrappers</description>
+
     <distributionManagement>
         <repository>
-            <id>nexus-releases</id>
-            <url>${nexus.url}/content/repositories/releases/</url>
+            <id>bintray-maven</id>
+            <url>https://api.bintray.com/maven/daonomic/maven/scalether-maven-plugin/;publish=1</url>
         </repository>
-        <snapshotRepository>
-            <id>nexus-snapshots</id>
-            <url>${nexus.url}/content/repositories/snapshots</url>
-        </snapshotRepository>
     </distributionManagement>
+
+    <repositories>
+        <repository>
+            <id>daonomic-bintray</id>
+            <name>daonomic-bintray</name>
+            <url>https://dl.bintray.com/daonomic/maven/</url>
+        </repository>
+    </repositories>
+
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.version>3.2.3</maven.version>
-        <scalether.version>0.1.0-SNAPSHOT</scalether.version>
+        <scalether.version>0.1.0</scalether.version>
     </properties>
+
     <dependencies>
         <dependency>
             <groupId>org.apache.maven</groupId>
@@ -49,7 +56,7 @@
             <version>3.4</version>
         </dependency>
         <dependency>
-            <groupId>org.scalether</groupId>
+            <groupId>io.daonomic.scalether</groupId>
             <artifactId>generator</artifactId>
             <version>${scalether.version}</version>
         </dependency>
