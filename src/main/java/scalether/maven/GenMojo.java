@@ -32,6 +32,12 @@ public class GenMojo extends AbstractMojo {
     @Parameter(name = "output", defaultValue = "${project.build.directory}/generated-sources/scalether")
     private File output;
 
+    /**
+     * Location of the output directory.
+     */
+    @Parameter(name = "testOutput", defaultValue = "${project.build.directory}/generated-test-sources/scalether")
+    private File testOutput;
+
     @Parameter(name = "contracts")
     private List<ContractGeneration> contracts;
 
@@ -40,13 +46,13 @@ public class GenMojo extends AbstractMojo {
             try {
                 if (contract.getTruffle() != null) {
                     getLog().info("Generating contract wrapper by truffle for " + contract.getTruffle().getName());
-                    generateByTruffle(contract.getName(), contract.getTruffle(), contract.getPackageName(), contract.getType());
+                    generateByTruffle(contract.isTest() ? testOutput : output, contract.getName(), contract.getTruffle(), contract.getPackageName(), contract.getType());
                 } else if (contract.getAbi() != null) {
                     if (StringUtils.isBlank(contract.getName())) {
                         getLog().warn("name not specified for abi " + contract.getAbi().getName());
                     } else {
                         getLog().info("Generating contract wrapper by abi for " + contract.getAbi().getName());
-                        generateByAbi(contract.getName(), contract.getAbi(), contract.getPackageName(), contract.getType());
+                        generateByAbi(contract.isTest() ? testOutput : output, contract.getName(), contract.getAbi(), contract.getPackageName(), contract.getType());
                     }
                 } else {
                     getLog().warn("no abi or truffle specified for contract generation. ignoring");
@@ -57,10 +63,11 @@ public class GenMojo extends AbstractMojo {
         }
 
         project.addCompileSourceRoot(output.toString());
+        project.addTestCompileSourceRoot(testOutput.toString());
     }
 
     @SuppressWarnings("ResultOfMethodCallIgnored")
-    private void generateByTruffle(String name, File truffleFile, String packageName, Type type) throws IOException, TemplateException {
+    private void generateByTruffle(File output, String name, File truffleFile, String packageName, Type type) throws IOException, TemplateException {
         ContractGenerator generator = new ContractGenerator();
         TruffleContract truffle;
         try (InputStream in = new FileInputStream(truffleFile)) {
@@ -78,7 +85,7 @@ public class GenMojo extends AbstractMojo {
     }
 
     @SuppressWarnings("ResultOfMethodCallIgnored")
-    private void generateByAbi(String name, File abiFile, String packageName, Type type) throws IOException, TemplateException {
+    private void generateByAbi(File output, String name, File abiFile, String packageName, Type type) throws IOException, TemplateException {
         ContractGenerator generator = new ContractGenerator();
         AbiItem[] abi;
         try (InputStream in = new FileInputStream(abiFile)) {

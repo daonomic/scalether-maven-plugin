@@ -10,6 +10,7 @@ public class ContractGeneration {
     private File truffle;
     private String packageName;
     private Type type;
+    private boolean test;
 
     public String getName() {
         return name;
@@ -49,5 +50,13 @@ public class ContractGeneration {
 
     public void setType(Type type) {
         this.type = type;
+    }
+
+    public boolean isTest() {
+        return test;
+    }
+
+    public void setTest(boolean test) {
+        this.test = test;
     }
 }
