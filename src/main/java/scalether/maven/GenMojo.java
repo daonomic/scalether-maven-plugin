@@ -48,12 +48,8 @@ public class GenMojo extends AbstractMojo {
                     getLog().info("Generating contract wrapper by truffle for " + contract.getTruffle().getName());
                     generateByTruffle(contract.isTest() ? testOutput : output, contract.getName(), contract.getTruffle(), contract.getPackageName(), contract.getType());
                 } else if (contract.getAbi() != null) {
-                    if (StringUtils.isBlank(contract.getName())) {
-                        getLog().warn("name not specified for abi " + contract.getAbi().getName());
-                    } else {
-                        getLog().info("Generating contract wrapper by abi for " + contract.getAbi().getName());
-                        generateByAbi(contract.isTest() ? testOutput : output, contract.getName(), contract.getAbi(), contract.getPackageName(), contract.getType());
-                    }
+                    getLog().info("Generating contract wrapper by abi for " + contract.getAbi().getName());
+                    generateByAbi(contract.isTest() ? testOutput : output, contract.getName(), contract.getAbi(), contract.getPackageName(), contract.getType());
                 } else {
                     getLog().warn("no abi or truffle specified for contract generation. ignoring");
                 }
@@ -90,6 +86,15 @@ public class GenMojo extends AbstractMojo {
         AbiItem[] abi;
         try (InputStream in = new FileInputStream(abiFile)) {
             abi = generator.mapper.readValue(in, AbiItem[].class);
+        }
+        if (StringUtils.isBlank(name)) {
+            String abiFileName = abiFile.getName();
+            int idx = abiFileName.indexOf('.');
+            if (idx != -1) {
+                name = abiFileName.substring(0, idx);
+            } else {
+                name = abiFileName;
+            }
         }
         TruffleContract truffle = new TruffleContract(name, Arrays.asList(abi), "0x");
         String resultPath = output.getAbsolutePath() + "/" + packageName.replace(".", "/");
