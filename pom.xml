@@ -3,7 +3,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>io.daonomic.scalether</groupId>
     <artifactId>scalether-maven-plugin</artifactId>
-    <version>0.1.7</version>
+    <version>1.0-SNAPSHOT</version>
     <packaging>maven-plugin</packaging>
     <description>maven plugin to generate smart contract wrappers</description>
 
@@ -29,7 +29,7 @@
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.version>3.2.3</maven.version>
-        <scalether.version>0.1.7</scalether.version>
+        <scalether.version>1.0-SNAPSHOT</scalether.version>
     </properties>
 
     <dependencies>
