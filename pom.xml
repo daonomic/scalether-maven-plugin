@@ -3,7 +3,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>io.daonomic.scalether</groupId>
     <artifactId>scalether-maven-plugin</artifactId>
-    <version>0.1.3</version>
+    <version>0.1.7</version>
     <packaging>maven-plugin</packaging>
     <description>maven plugin to generate smart contract wrappers</description>
 
@@ -12,6 +12,10 @@
             <id>bintray-maven</id>
             <url>https://api.bintray.com/maven/daonomic/maven/scalether-maven-plugin/;publish=1</url>
         </repository>
+        <snapshotRepository>
+            <id>nexus-snapshots</id>
+            <url>${nexus.url}/content/repositories/snapshots</url>
+        </snapshotRepository>
     </distributionManagement>
 
     <repositories>
@@ -25,7 +29,7 @@
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.version>3.2.3</maven.version>
-        <scalether.version>0.1.4</scalether.version>
+        <scalether.version>0.1.7</scalether.version>
     </properties>
 
     <dependencies>
