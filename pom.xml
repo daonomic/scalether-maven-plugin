@@ -21,8 +21,11 @@
     <repositories>
         <repository>
             <id>daonomic-bintray</id>
-            <name>daonomic-bintray</name>
             <url>https://dl.bintray.com/daonomic/maven/</url>
+        </repository>
+        <repository>
+            <id>nexus-snapshots</id>
+            <url>${nexus.url}/content/repositories/snapshots</url>
         </repository>
     </repositories>
 
