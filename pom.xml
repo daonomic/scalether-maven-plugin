@@ -8,10 +8,6 @@
     <description>maven plugin to generate smart contract wrappers</description>
 
     <distributionManagement>
-        <repository>
-            <id>bintray-maven</id>
-            <url>https://api.bintray.com/maven/daonomic/maven/scalether-maven-plugin/;publish=1</url>
-        </repository>
         <snapshotRepository>
             <id>nexus-snapshots</id>
             <url>${nexus.url}/content/repositories/snapshots</url>
@@ -19,10 +15,6 @@
     </distributionManagement>
 
     <repositories>
-        <repository>
-            <id>daonomic-bintray</id>
-            <url>https://dl.bintray.com/daonomic/maven/</url>
-        </repository>
         <repository>
             <id>nexus-snapshots</id>
             <url>${nexus.url}/content/repositories/snapshots</url>
